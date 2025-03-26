@@ -1,0 +1,26 @@
+drop table tbl_board;
+create table tbl_board(
+	bid int auto_increment primary key,
+    subject varchar(100) not null,
+    contents varchar(3000) not null,
+    hit int default 0,
+    writer varchar(50) not null,
+                     -- now() == oracle sysdate
+    reg_date datetime default now() not null
+);
+
+CREATE TABLE tbl_board (
+    bid INT AUTO_INCREMENT PRIMARY KEY,
+    subject VARCHAR(100) NOT NULL,
+    contents VARCHAR(3000) NOT NULL,
+    hit INT DEFAULT 0,
+    writer VARCHAR(50) NOT NULL,
+    reg_date DATETIME DEFAULT NOW() NOT NULL,
+    modify_date DATETIME DEFAULT NULL,
+    likes INT DEFAULT 0
+);
+
+insert into tbl_board(subject, contents, writer)
+values('테스트!~~', '테스트', '아무개');
+
+select * from tbl_board;

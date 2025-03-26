@@ -1,0 +1,19 @@
+# 빌드 폴더
+# 무조건 target 폴더 제외
+/target/*
+# 단, 이 파일만 포함
+!target/my-spring-app.war
+
+# 이클립스 관련
+*.classpath
+*.project
+.settings/
+.apt_generated/
+.factorypath
+
+# STS
+.springBeans
+
+# IDE
+.idea/
+*.iml

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mbc.mapper.BoardMapper">
+  
+  <!-- 게시글 등록 -->
+  <insert id="insert" parameterType="boardDTO">
+    INSERT INTO tbl_board(subject, contents, writer, reg_date)
+    VALUES(#{subject}, #{contents}, #{writer}, NOW())
+  </insert>
+
+  <!-- 게시글 리스트 -->
+  <select id="getList" resultType="boardDTO">
+    SELECT * FROM tbl_board 
+    ORDER BY bid DESC
+    LIMIT #{startIndex}, #{cntPerPage}
+  </select>
+
+  <!-- 게시글 상세보기 -->
+  <select id="view" resultType="boardDTO">
+    SELECT * FROM tbl_board WHERE bid = #{bid}
+  </select>
+
+  <!-- 게시글 수정하기 (modify_date 추가) -->
+  <update id="update">
+    UPDATE tbl_board 
+    SET subject = #{subject}, 
+        contents = #{contents}, 
+        modify_date = NOW()
+    WHERE bid = #{bid}
+  </update>
+
+  <!-- 게시글 삭제하기 -->
+  <delete id="delete">
+    DELETE FROM tbl_board WHERE bid = #{bid}
+  </delete>
+
+  <!-- 조회수 추가하기 -->
+  <update id="hitAdd">
+    UPDATE tbl_board 
+    SET hit = hit + 1
+    WHERE bid=#{bid}
+  </update>
+
+  <!-- 좋아요 추가하기 -->
+  <update id="likeAdd">
+    UPDATE tbl_board 
+    SET likes = likes + 1
+    WHERE bid=#{bid}
+  </update>
+
+  <!-- 전체 게시글 수 -->
+  <select id="totalCnt" resultType="Integer">
+    SELECT count(*) FROM tbl_board
+  </select>
+
+</mapper>
